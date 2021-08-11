@@ -13,6 +13,14 @@ find_package(OpenSSL 3.0 REQUIRED)
 if (NOT DEFINED OPENSSL_ROOT_DIR)
   get_filename_component(OPENSSL_ROOT_DIR ${OPENSSL_INCLUDE_DIR} DIRECTORY)
   message(STATUS "Setting OpenSSL root: ${OPENSSL_ROOT_DIR}")
+else()
+  find_library(OPENSSL_CRYPTO_LIBRARY
+    NAMES
+      crypto
+    HINTS
+      ${OPENSSL_ROOT_DIR}
+  )
+  message(STATUS "OpenSSL library manually found: ${OPENSSL_CRYPTO_LIBRARY}")
 endif()
 find_program(OPENSSL_PROGRAM openssl
   PATHS ${OPENSSL_ROOT_DIR} PATH_SUFFIXES apps bin NO_DEFAULT_PATH)
