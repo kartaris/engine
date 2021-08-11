@@ -19,6 +19,7 @@ else()
       crypto
     HINTS
       ${OPENSSL_ROOT_DIR}
+    NO_DEFAULT_PATH
   )
   message(STATUS "OpenSSL library manually found: ${OPENSSL_CRYPTO_LIBRARY}")
 endif()
